@@ -89,7 +89,8 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-
+    cartList = [];
+    document.getElementById("count_product").innerText = cartList.length;
 }
 
 // Exercise 3
