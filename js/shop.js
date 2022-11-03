@@ -74,7 +74,17 @@ var total = 0;
 // Exercise 1
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cartList array
+    var bFound=false;
+    for(i=0;i<products.length && !bFound;i++)
+    {
+        if (products[i].id==id)
+        {
+            bFound=true;
+            // 2. Add found product to the cartList array
+            cartList.push(products[i]);
+        }
+    }
+    document.getElementById("count_product").innerText = cartList.length;
 }
 
 // Exercise 2
