@@ -84,18 +84,30 @@ function buy(id) {
             cartList.push(products[i]);
         }
     }
+    console.log({cartList});
     document.getElementById("count_product").innerText = cartList.length;
+    calculateTotal();
 }
 
 // Exercise 2
 function cleanCart() {
     cartList = [];
+    total =0;
+    console.log({total});
+    console.log({cartList});
     document.getElementById("count_product").innerText = cartList.length;
 }
 
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
+    var newTotal=0;
+    for(i=0;i<cartList.length;i++)
+    {
+        newTotal+=cartList[i].price;
+    }
+    total=newTotal;
+    console.log({total});
 }
 
 // Exercise 4
