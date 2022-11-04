@@ -13,3 +13,7 @@
 #   Utilizamos la variable global total
 #   Utilizamos una variable local en la función calculateTotal
 #   Reseteamos la variable global total a cero cuando vaciamos el carrito
+#
+# N1.E4 implementación de la función que consolida el carro
+#   agrupa los items que son iguales
+#   crear un botón para llamar a la función
