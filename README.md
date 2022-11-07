@@ -31,7 +31,13 @@
 #   quitamos el botón para consolidar el carro porque llamamos a esa función al mostrar el carrito.
 #
 # N1.E7 validación del formulario
+#   validamos cada una de los requisitos con una función específica
 #   añadimos la clase is-invalid a un elemento cuando hay un error
 #   eliminamos la clase is-invalid de un elemento cuando no hay error
+#
+# N2.E9 eliminación de un producto
+#   añadimos un botón como columna de la lista, (si hay más de uno ponemos un - si solo hay uno ponemos un delete)
+#   recalculamos el cart, los descuentos, la lista del carrito y los totales cada vez que se elimina un producto o una unidad de un producto
+#
 
 

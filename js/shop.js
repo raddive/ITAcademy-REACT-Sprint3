@@ -137,6 +137,7 @@ function generateCart() {
         if(!bFound)
         {
             cartElement = {
+                id : cartList[i].id,
                 name : cartList[i].name,
                 price : cartList[i].price,
                 type :  cartList[i].type,
@@ -192,13 +193,22 @@ function printCart() {
     {
         let row = cartTable.insertRow();
         let product = row.insertCell(0);
-        product.innerText = "<b>"+cart[i].name+"<b>";
+        product.innerHTML = "<b>"+cart[i].name+"<b>";
         let price = row.insertCell(1);
         price.innerText = cart[i].price;    
         let quantity = row.insertCell(2);
         quantity.innerText = cart[i].quantity;    
         let totalDiscount = row.insertCell(3);
         totalDiscount.innerText = "$"+cart[i].subtotalWithDiscount.toFixed(2);
+        let btnRemove = row.insertCell(4);
+        let btnType;        
+        if(cart[i].quantity==1)
+            btnType="<i class='fas fa-trash me-1'></a>"
+        else
+            btnType="<i class='fas fa-minus me-1'></a>"
+        
+        btnRemove.innerHTML = "<a href='javascript:void(0)' class='btn flex-center' type='button' onclick='removeFromCart("+cart[i].id+")'>"+btnType;
+
         grandTotal+=cart[i].subtotalWithDiscount;
     }
 
@@ -221,7 +231,17 @@ function addToCart(id) {
 // Exercise 8
 function removeFromCart(id) {
     // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cartList array
+    var bFound=false
+    for(i=0;i<cartList.length && !bFound ;i++)
+    {
+        if(cartList[i].id==id)
+        {
+            bFound=true;
+            cartList.splice(i,1);
+        }
+    }
+    printCart();
+    document.getElementById("count_product").innerText = cartList.length;
 }
 
 function open_modal(){
