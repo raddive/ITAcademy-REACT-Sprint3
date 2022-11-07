@@ -143,13 +143,33 @@ function generateCart() {
         else{
             cart[cartIndex].quantity++;
             cart[cartIndex].subtotal=cart[cartIndex].price*cart[cartIndex].quantity;
+            cart[cartIndex].subtotalWithDiscount=cart[cartIndex].subtotal;
         }
     }
+
+    applyPromotionsCart();
 }
 
 // Exercise 5
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+    var bFound;
+    for(i=0;i<cart.length ;i++)
+    {
+        bFound=false;
+        for(j=0;j<products.length && !bFound;j++)
+        {
+            if(cart[i].name == products[j].name)
+            {
+                bFound=true;
+                if(products[j].hasOwnProperty("offer") && cart[i].quantity>=products[j].offer.number)
+                {
+                    var discount=(100-products[j].offer.percent)/100;
+                    cart[i].subtotalWithDiscount = cart[i].quantity * cart[i].price * discount;
+                }
+            }
+        }
+    }
 }
 
 // Exercise 6

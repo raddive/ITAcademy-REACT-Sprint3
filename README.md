@@ -17,3 +17,8 @@
 # N1.E4 implementación de la función que consolida el carro
 #   agrupa los items que son iguales
 #   crear un botón para llamar a la función
+#
+# N1.E5 implementación de las promociones
+#   en lugar de hardcodear para el aceite y pastel sólo, utilizamos la funcion hasOwnPropierty("offer") del objeto para saber si el producto tiene descuentos
+#   si tiene descuento lo aplicamos para calcular el subtotalWithDiscount 
+#
