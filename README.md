@@ -21,4 +21,11 @@
 # N1.E5 implementación de las promociones
 #   en lugar de hardcodear para el aceite y pastel sólo, utilizamos la funcion hasOwnPropierty("offer") del objeto para saber si el producto tiene descuentos
 #   si tiene descuento lo aplicamos para calcular el subtotalWithDiscount 
+#   llamamos a la función que aplica las promociones al final de la función que consolida el carro
 #
+# N1.E5 implementación de las promociones
+#   llamamos a la función que consolida el carro al inicio de la función printCart
+#   accedemos a la tabla cart_list
+#   borramos las filas que existan para rellenar con el nuevo carro
+#   al llamar a la función cleanCart tambien borramos las filas que existan en la tabla
+#   quitamos el botón para consolidar el carro porque llamamos a esa función al mostrar el carrito.
