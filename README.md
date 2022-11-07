@@ -23,7 +23,7 @@
 #   si tiene descuento lo aplicamos para calcular el subtotalWithDiscount 
 #   llamamos a la función que aplica las promociones al final de la función que consolida el carro
 #
-# N1.E5 implementación de las promociones
+# N1.E6 implementación de las promociones
 #   llamamos a la función que consolida el carro al inicio de la función printCart
 #   accedemos a la tabla cart_list
 #   borramos las filas que existan para rellenar con el nuevo carro
