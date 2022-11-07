@@ -29,3 +29,9 @@
 #   borramos las filas que existan para rellenar con el nuevo carro
 #   al llamar a la función cleanCart tambien borramos las filas que existan en la tabla
 #   quitamos el botón para consolidar el carro porque llamamos a esa función al mostrar el carrito.
+#
+# N1.E7 validación del formulario
+#   añadimos la clase is-invalid a un elemento cuando hay un error
+#   eliminamos la clase is-invalid de un elemento cuando no hay error
+
+
