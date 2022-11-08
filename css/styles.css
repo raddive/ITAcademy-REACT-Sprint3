@@ -76,6 +76,17 @@
   }
 }
 
+#header_div {
+  background-image :url("../images/img_header.jpg") ; 
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+} 
+
+.img_cat{
+  width: 500px;
+}
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -11286,3 +11297,6 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+
+

@@ -16,13 +16,17 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
 		integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 	<!-- Core theme CSS (includes Bootstrap)-->
+	<link rel="stylesheet" href="css/styles.css" />
 </head>
 
 <body>
 	<!-- Navigation-->
 	<nav class="navbar py-3 py-lg-0 navbar-light bg-light navbar-expand-lg" id="navbar-example2">
 		<div class="container d-flex">
-			<a class="navbar-brand" href="#!">ShopNow</a>
+			<a class="navbar-brand" href="./index.html#!">
+				<img src="images/shop-logo.png" style="height: 50px" alt="Avatar Logo" class="rounded-pill pe-3"> 
+				Wizarding World Shop
+			</a>
 			<div class="d-flex flex-row order-lg-last align-items-center">
 
 				<button type="button" class="navbar-toggler order-last collapsed" data-bs-toggle="collapse"
@@ -34,7 +38,7 @@
 						<a href="javascript:void(0)" class="btn btn-outline-dark flex-center" type="button" data-bs-toggle="modal"
 							data-bs-target="#cartModal" onclick="open_modal()" data-bs-auto-close="outside">
 							<i class="fas fa-shopping-cart me-1"></i> Cart <span class="badge bg-dark text-white ms-1 rounded-pill"
-								id="count_product">0</span>
+								id="check_out_count_product">0</span>
 						</a>
 					</li>
 				</ul>
@@ -44,87 +48,146 @@
 
 				<ul class="navbar-nav me-auto mb-4 mb-lg-0 ms-lg-5">
 					<li class="nav-item">
-						<a class="nav-link" href="#grocery"><i class="fas fa-shopping-basket"></i> Grocery</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#beauty"><i class="fas fa-heart"></i> Beauty</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#clothes"><i class="fas fa-tshirt"></i> Clothes</a>
-					</li>
-
+					 <a class="nav-link" href="#wands"><i class="fas fa-magic"></i> Wands</a>
+				   </li>
+				   <li class="nav-item">
+					 <a class="nav-link" href="#books"><i class="fas fa-book"></i> Books</a>
+				   </li>
+				   <li class="nav-item">
+					 <a class="nav-link" href="#clothes"><i class="fas fa-hat-wizard"></i> Clothes</a>
+				   </li>
 				</ul>
 			</div>
 		</div>
 	</nav>
+	<!-- Header-->
+	<header  id="header_div" class="bg-dark py-5">
+		<div class="container px-4 px-lg-5 my-5">
+			<div class="text-center text-white">
+				<h1 class="display-4 fw-bolder">Checkout</h1>
+			</div>
+		</div>
+	</header>
+
 	<div class="container">
-		<h1 class="text-center head m-4">Checkout Page</h1>
-
 		<div class="row mr-0">
-			<div class="col-sm-6">
-				<h3 class="my-3 bord shadow text-center"><i class="fas fa-dollar-sign p-2"></i>Cash on Delivery</h3>
+			<div class="col-12 col-lg-3 order-lg-2">
+				<h3 class="my-3 py-3"><i class="fas fa-shopping-cart p-2"></i>Order Summary</h3>
+				<table class="table">
+					<thead>
+						<tr>
+						  <th scope="col">Product</th>
+						  <th scope="col">Qty.</th>
+						  <th scope="col">Price</th>
+						  <th scope="col">Total <small>(with discount)</small></th>
+						</tr>
+					</thead>
+					<tbody id="check_out_cart_list">
+					</tbody>
+				</table>
+				  <div class="text-center fs-3">
+					Total: $<span id="total_price">36</span>
+				  </div>
 			</div>
-			<div class="col-sm-6 ">
-				<h3 class="my-3 bord shadow text-center"><i class="fas fa-arrows-alt-h p-2"></i>100% Return</h3>
+			<div class="col-12 col-lg-9 col-or">
+				<form class="form">
+					<h3 class="my-3 text-start py-3"><i class="fas fa-money-check-alt p-2"></i>Payment Information</h3>
+					<div class="row bord shadow my-3">
+						<h4 class="pt-5">Personal Information</h4>
+						<div class="col-sm-6">
+							<div class="mt-3">
+								<label for="fName" class="form-label">First Name:</label>
+								<input id="fName" class="form-control ml-3" type="text" placeholder="First Name" />
+								<div id="errorName" class="invalid-feedback">This field is required and must have, at least, 3 characters
+								</div>
+							</div>
+							<div class="mt-3 ">
+								<label for="fEmail" class="form-label">Email:</label>
+								<input id="fEmail" class="form-control ml-3" type="email" placeholder="Email" minlength="3" />
+								<div id="errorEmail" class="invalid-feedback">This field is required and must contain an '@' and have, at
+									least, 3 characters</div>
+							</div>
+							<div class="mt-3 ">
+								<label for="fAddress" class="form-label">Address:</label>
+								<input id="fAddress" class="form-control" type="text" placeholder="Address" minlength="3" />
+								<div id="errorAddress" class="invalid-feedback">This field is required and must have, at least, 3 characters
+								</div>
+							</div>
+						</div>
+						<div class="col-12 col-sm-6">
+							<div class="mt-3">
+								<label for="fLastN" class="form-label">Last Name:</label>
+								<input id="fLastN" class="form-control" type="text" placeholder="Last Name" minlength="3" />
+								<div id="errorLastN" class="invalid-feedback">This field is required and must have, at least, 3 characters
+								</div>
+							</div>
+							<div class="mt-3">
+								<label for="fPassword" class="form-label">Password:</label>
+								<input id="fPassword" class="form-control" title="(4-8 characters)" type="password" minlength="4"
+									maxlength="8" placeholder="Password" />
+								<div id="errorPassword" class="invalid-feedback">Enter a correct password</div>
+							</div>
+							<div class="mt-3">
+								<label for="fPhone" class="form-label">Phone Number:</label>
+								<input id="fPhone" class="form-control" type="number" placeholder="Phone No." />
+								<div id="errorPhone" class="invalid-feedback">Invalid phone number!! Must be 9 digits with no letters</div>
+							</div>
+						</div>
+						<div class="row">
+							<h4 class="pt-5">Your credits cards</h4>
+							<div class="col-4">
+								<img class="card-img-top" src="./images/cc1.jpg" alt="..." />
+							</div>
+							<div class="col-4">
+								<img class="card-img-top" src="./images/cc2.jpg" alt="..." />
+							</div>
+
+						</div>
+
+
+
+						<div class="col-12 my-4 final">
+							<button type="button" id="btn" class="p-2 px-4 btn btn-primary shadow-lg" onclick="validate()">
+								<i class="fas fa-cart-arrow-down p-2"></i>Save
+							</button>
+						</div>
+					</div>
+
+
+				</form>
 			</div>
 		</div>
 
 		<div class="row mr-0">
-			<div class="col-sm-6">
-				<h3 class="my-3 bord shadow text-center"><i class="far fa-thumbs-up p-2"></i>Quality Assured</h3>
+			<div class="col-12 col-lg-9">
+				<h3 class="my-3 py-3"><i class="fas fa-shipping-fast p-2"></i>Shipping Address</h3>
+				<div class="row">
+					<div class="col-6">
+						<div class="card">
+							<img src="./images/m2.jpg" class="card-img-top" alt="...">
+							<div class="card-body">
+							  <h5 class="card-title">HOME</h5>
+							  <p class="card-text">1234 Home ST.</p>
+							</div>
+						</div>
+					</div>
+					<div class="col-6">
+						<div class="card">
+							<img src="./images/m2.jpg" class="card-img-top" alt="...">
+							<div class="card-body">
+							  <h5 class="card-title">WORK</h5>
+							  <p class="card-text">9876 Work ST.</p>
+							</div>
+						  </div>
+					</div>
+				</div>
 			</div>
-			<div class="col-sm-6 ">
-				<h3 class="my-3 bord shadow text-center"><i class="fas fa-stopwatch p-2"></i>Delivery on time</h3>
+			<div class="col-12 col-lg-3 pb-3">
+				<h3 class="my-3 py-3"><i class="fas fa-percentage p-2"></i>Promotions</h3>
+				<img src="./images/d1.jpg" class="card-img-top" alt="...">
 			</div>
 		</div>
-		<form class="form">
-			<div class="row bord p-5 shadow m-5">
-				<div class="col-sm-6">
-					<div class="mt-3">
-						<label for="fName" class="form-label">First Name:</label>
-						<input id="fName" class="form-control ml-3" type="text" placeholder="First Name" />
-						<div id="errorName" class="invalid-feedback">This field is required and must have, at least, 3 characters
-						</div>
-					</div>
-					<div class="mt-3 ">
-						<label for="fEmail" class="form-label">Email:</label>
-						<input id="fEmail" class="form-control ml-3" type="email" placeholder="Email" minlength="3" />
-						<div id="errorEmail" class="invalid-feedback">This field is required and must contain an '@' and have, at
-							least, 3 characters</div>
-					</div>
-					<div class="mt-3 ">
-						<label for="fAddress" class="form-label">Address:</label>
-						<input id="fAddress" class="form-control" type="text" placeholder="Address" minlength="3" />
-						<div id="errorAddress" class="invalid-feedback">This field is required and must have, at least, 3 characters
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-6">
-					<div class="mt-3">
-						<label for="fLastN" class="form-label">Last Name:</label>
-						<input id="fLastN" class="form-control" type="text" placeholder="Last Name" minlength="3" />
-						<div id="errorLastN" class="invalid-feedback">This field is required and must have, at least, 3 characters
-						</div>
-					</div>
-					<div class="mt-3">
-						<label for="fPassword" class="form-label">Password:</label>
-						<input id="fPassword" class="form-control" title="(4-8 characters)" type="password" minlength="4"
-							maxlength="8" placeholder="Password" />
-						<div id="errorPassword" class="invalid-feedback">Enter a correct password</div>
-					</div>
-					<div class="mt-3">
-						<label for="fPhone" class="form-label">Phone Number:</label>
-						<input id="fPhone" class="form-control" type="number" placeholder="Phone No." />
-						<div id="errorPhone" class="invalid-feedback">Invalid phone number!! Must be 9 digits with no letters</div>
-					</div>
-				</div>
-				<div class="col-12 mt-4 final">
-					<button type="submit" id="btn" class="p-2 px-4 btn btn-primary shadow-lg" onclick="validate()">
-						<i class="fas fa-cart-arrow-down p-2"></i>Save
-					</button>
-				</div>
-			</div>
-		</form>
+		
 
 	</div>
 
@@ -132,7 +195,7 @@
 	<!-- Footer-->
 	<footer class="py-3 bg-dark">
 		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your Website 2022</p>
+			<p class="m-0 text-center text-white">Copyright &copy; raddive 2022</p>
 		</div>
 	</footer>
 
@@ -144,17 +207,19 @@
 					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					<div>
-						<ul class="list">
-
-						</ul>
-						<div>
-							<h3 class="text-center bill px-5">Select Something</h3>
-						</div>
-						<div class="text-center">
-							<a href="checkout.html" class="btn btn-primary m-3">Checkout</a>
-						</div>
-					</div>
+					<h3 class="text-center bill px-5">Shopping Cart</h3>
+				  	<table class="table">
+						<thead>
+							<tr>
+							<th scope="col">Product</th>
+							<th scope="col">Qty.</th>
+							<th scope="col">Price</th>
+							<th scope="col">Total <small>(with discount)</small></th>
+							</tr>
+						</thead>
+						<tbody id="check_out_cart_list_modal">
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
