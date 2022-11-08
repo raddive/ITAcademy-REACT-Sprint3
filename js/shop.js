@@ -2,9 +2,9 @@
 var products = [
    {
         id: 1,
-        name: 'cooking oil',
+        name: 'Harry Potter wand',
         price: 10.5,
-        type: 'grocery',
+        type: 'wand',
         offer: {
             number: 3,
             percent: 20
@@ -12,64 +12,95 @@ var products = [
     },
     {
         id: 2,
-        name: 'Pasta',
-        price: 6.25,
-        type: 'grocery'
+        name: 'Dumbledore wand',
+        price: 9.5,
+        type: 'wand'
     },
     {
         id: 3,
-        name: 'Instant cupcake mixture',
-        price: 5,
-        type: 'grocery',
+        name: 'Hermione wand',
+        price: 9,
+        type: 'wand',
         offer: {
-            number: 10,
-            percent: 30
+            number: 2,
+            percent: 10
         }
     },
     {
         id: 4,
-        name: 'All-in-one',
-        price: 260,
-        type: 'beauty'
+        name: "Sorcere's Stone",
+        price: 21,
+        type: 'books'
     },
     {
         id: 5,
-        name: 'Zero Make-up Kit',
-        price: 20.5,
-        type: 'beauty'
+        name: 'Chamber of secrets',
+        price: 23,
+        type: 'books'
     },
     {
         id: 6,
-        name: 'Lip Tints',
+        name: 'Prisioner of Azkaban',
         price: 12.75,
-        type: 'beauty'
+        type: 'books'
     },
     {
         id: 7,
-        name: 'Lawn Dress',
+        name: 'Gryffindo scarf',
         price: 15,
         type: 'clothes'
     },
     {
         id: 8,
-        name: 'Lawn-Chiffon Combo',
+        name: 'Howgarts cape',
         price: 19.99,
         type: 'clothes'
     },
     {
         id: 9,
-        name: 'Toddler Frock',
+        name: 'Howgarts hat',
         price: 9.99,
         type: 'clothes'
     }
 ]
+
+var localAdapter = {
+ 
+    saveObject: function (object,id) {
+ 
+        var stringified = JSON.stringify(object);
+        localStorage.setItem(id, stringified);
+        return true;
+ 
+    },
+    getObject: function (id) {
+ 
+        return JSON.parse(localStorage.getItem(id));
+ 
+    },
+    clearObject: function (id) {
+ 
+        localStorage.removeItem(id);
+ 
+    }
+};
+
+
+
+
 // Array with products (objects) added directly with push(). Products in this array are repeated.
 var cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
-var cart = [];
+var cart=localAdapter.getObject("cart");
+if(!cart)
+    cart = [];
+var checkOutCart;
 
 var total = 0;
+var totalItems=localAdapter.getObject("totalItems");
+if(totalItems>0)
+    document.getElementById("count_product").innerText = totalItems;
 
 // Exercise 1
 function buy(id) {
@@ -92,6 +123,8 @@ function buy(id) {
 // Exercise 2
 function cleanCart() {
     cartList = [];
+    cart =[];
+    totalItems=0;
     total =0;
     console.log({total});
     console.log({cartList});
@@ -101,6 +134,8 @@ function cleanCart() {
         cartTable.deleteRow(0);
     }
     document.getElementById("total_price").innerText = "0,00";
+    localAdapter.clearObject("cart");
+    localAdapter.clearObject("totalItems");
 
 }
 
@@ -180,26 +215,25 @@ function applyPromotionsCart() {
 }
 
 // Exercise 6
-function printCart() {
-    generateCart();
+function printCart(currentCart,table_id) {
     // Fill the shopping cart modal manipulating the shopping cart dom
-    const cartTable=document.getElementById("cart_list");
+    const cartTable=document.getElementById(table_id);
     while(cartTable.rows.length > 0) {
         cartTable.deleteRow(0);
     }
 
     var grandTotal=0;
-    for(i=0;i<cart.length ;i++)
+    for(i=0;i<currentCart.length ;i++)
     {
         let row = cartTable.insertRow();
         let product = row.insertCell(0);
-        product.innerHTML = "<b>"+cart[i].name+"<b>";
-        let price = row.insertCell(1);
-        price.innerText = cart[i].price;    
-        let quantity = row.insertCell(2);
-        quantity.innerText = cart[i].quantity;    
+        product.innerHTML = "<b>"+currentCart[i].name+"<b>";
+        let quantity = row.insertCell(1);
+        quantity.innerText = currentCart[i].quantity;    
+        let price = row.insertCell(2);
+        price.innerText = "$"+currentCart[i].price;    
         let totalDiscount = row.insertCell(3);
-        totalDiscount.innerText = "$"+cart[i].subtotalWithDiscount.toFixed(2);
+        totalDiscount.innerText = "$"+currentCart[i].subtotalWithDiscount.toFixed(2);
         let btnRemove = row.insertCell(4);
         let btnType;        
         if(cart[i].quantity==1)
@@ -207,31 +241,106 @@ function printCart() {
         else
             btnType="<i class='fas fa-minus me-1'></a>"
         
-        btnRemove.innerHTML = "<a href='javascript:void(0)' class='btn flex-center' type='button' onclick='removeFromCart("+cart[i].id+")'>"+btnType;
+        btnRemove.innerHTML = "<a href='javascript:void(0)' class='btn flex-center' type='button' onclick='removeFromCart("+currentCart[i].id+")'>"+btnType;
 
-        grandTotal+=cart[i].subtotalWithDiscount;
+
+        grandTotal+=currentCart[i].subtotalWithDiscount;
     }
 
     document.getElementById("total_price").innerText = grandTotal.toFixed(2);
+
+    localAdapter.saveObject(cart,"cart");
+    localAdapter.saveObject(totalItems,"totalItems");
 }
-
-
-
 
 
 // ** Nivell II **
 
-// Exercise 7
+// Exercise 8
 function addToCart(id) {
     // Refactor previous code in order to simplify it 
     // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cart array or update its quantity in case it has been added previously.
+    var bFound=false;
+    for(i=0;i<products.length && !bFound;i++)
+    {
+        if (products[i].id==id)
+        {
+            bFound=true;
+            totalItems++;
+            // 2. Add found product to the cart array or update its quantity in case it has been added previously.
+            bFoundAtCart=false;
+            alreadyQuantity=1;
+            for(j=0;j<cart.length && !bFoundAtCart;j++)
+            {
+                if(products[i].name == cart[j].name)
+                {
+                    bFoundAtCart=true;
+                    cartIndex=j;
+                }
+    
+            }
+            if(!bFoundAtCart)
+            {
+                cartElement = {
+                    id : products[i].id,
+                    name : products[i].name,
+                    price : products[i].price,
+                    type :  products[i].type,
+                    quantity : 1,
+                    subtotal : products[i].price,
+                    subtotalWithDiscount: products[i].price
+                }
+                cart.push(cartElement);
+            }
+            else{
+                cart[cartIndex].quantity++;
+                cart[cartIndex].subtotal=cart[cartIndex].price*cart[cartIndex].quantity;
+                cart[cartIndex].subtotalWithDiscount=cart[cartIndex].subtotal;
+            }
+        }
+    }
+    document.getElementById("count_product").innerText = totalItems;
+    applyPromotionsCart();
 }
 
-// Exercise 8
+// Exercise 9
 function removeFromCart(id) {
     // 1. Loop for to the array products to get the item to add to cart
-    var bFound=false
+    var bFound=false;
+    for(i=0;i<products.length && !bFound;i++)
+    {
+        if (products[i].id==id)
+        {
+            bFound=true;
+            var bFoundAtCart=false
+            for(j=0;j<cart.length && !bFoundAtCart;j++)
+            {
+                if(products[i].name == cart[j].name)
+                {
+                    bFoundAtCart=true;
+                    totalItems--;
+                    if(cart[j].quantity==1)
+                    {
+                        cart.splice(j,1);
+                    }
+                    else if(cart[j].quantity>1)
+                    {
+                        cart[j].quantity--;
+                        cart[j].subtotal=cart[j].price*cart[j].quantity;
+                        cart[j].subtotalWithDiscount=cart[j].subtotal;
+                    }
+
+                }
+            }
+        }
+    }
+    document.getElementById("count_product").innerText = totalItems;
+    applyPromotionsCart();
+    printCart(cart,"cart_list");
+
+
+
+
     for(i=0;i<cartList.length && !bFound ;i++)
     {
         if(cartList[i].id==id)
@@ -240,11 +349,11 @@ function removeFromCart(id) {
             cartList.splice(i,1);
         }
     }
-    printCart();
+    printCart(cart,"cart_list");
     document.getElementById("count_product").innerText = cartList.length;
 }
 
 function open_modal(){
 	console.log("Open Modal");
-	printCart();
+	printCart(cart,"cart_list");
 }

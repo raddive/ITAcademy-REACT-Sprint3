@@ -1,5 +1,14 @@
 var error=0;
 
+var checkOutCart=localAdapter.getObject("cart");
+var checkOutTotalItems=localAdapter.getObject("totalItems");
+if(checkOutCart && checkOutTotalItems>0)
+{
+	document.getElementById("check_out_count_product").innerText = checkOutTotalItems;
+	printCart(checkOutCart,"check_out_cart_list");
+	printCart(checkOutCart,"check_out_cart_list_modal");
+}
+
 // Exercise 6
 function validate() {
 	error=0;

@@ -39,5 +39,9 @@
 #   añadimos un botón como columna de la lista, (si hay más de uno ponemos un - si solo hay uno ponemos un delete)
 #   recalculamos el cart, los descuentos, la lista del carrito y los totales cada vez que se elimina un producto o una unidad de un producto
 #
+# N2.E10 maquetación real
+#   añadimos imagenes y tema real de una tienda de Harry Potter
+#   añadimos funcionalidad para arrastrar el carrito de la compra desde index.html a checkout.html
+#   añadimos comportamiento responsive
 
 
