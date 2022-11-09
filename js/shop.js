@@ -1,104 +1,36 @@
 // If you have time, you can move this variable "products" to a json or js file and load the data in this js. It will look more professional
-var products = [
-   {
-        id: 1,
-        name: 'Harry Potter wand',
-        price: 10.5,
-        type: 'wand',
-        offer: {
-            number: 3,
-            percent: 20
-        }
-    },
-    {
-        id: 2,
-        name: 'Dumbledore wand',
-        price: 9.5,
-        type: 'wand'
-    },
-    {
-        id: 3,
-        name: 'Hermione wand',
-        price: 9,
-        type: 'wand',
-        offer: {
-            number: 2,
-            percent: 10
-        }
-    },
-    {
-        id: 4,
-        name: "Sorcere's Stone",
-        price: 21,
-        type: 'books'
-    },
-    {
-        id: 5,
-        name: 'Chamber of secrets',
-        price: 23,
-        type: 'books'
-    },
-    {
-        id: 6,
-        name: 'Prisioner of Azkaban',
-        price: 12.75,
-        type: 'books'
-    },
-    {
-        id: 7,
-        name: 'Gryffindo scarf',
-        price: 15,
-        type: 'clothes'
-    },
-    {
-        id: 8,
-        name: 'Howgarts cape',
-        price: 19.99,
-        type: 'clothes'
-    },
-    {
-        id: 9,
-        name: 'Howgarts hat',
-        price: 9.99,
-        type: 'clothes'
-    }
-]
 
-var localAdapter = {
+function saveObjectLocal(object,id) {
  
-    saveObject: function (object,id) {
- 
-        var stringified = JSON.stringify(object);
-        localStorage.setItem(id, stringified);
-        return true;
- 
-    },
-    getObject: function (id) {
- 
-        return JSON.parse(localStorage.getItem(id));
- 
-    },
-    clearObject: function (id) {
- 
-        localStorage.removeItem(id);
- 
-    }
-};
+    var stringified = JSON.stringify(object);
+    localStorage.setItem(id, stringified);
+    return true;
 
+}
 
+function loadObjectLocal(id) {
 
+    return JSON.parse(localStorage.getItem(id));
+
+}
+
+function cleanObjectLocal(id) {
+ 
+    localStorage.removeItem(id);
+
+}
 
 // Array with products (objects) added directly with push(). Products in this array are repeated.
 var cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
-var cart=localAdapter.getObject("cart");
+var cart=loadObjectLocal("cart");
 if(!cart)
     cart = [];
 var checkOutCart;
 
 var total = 0;
-var totalItems=localAdapter.getObject("totalItems");
+var totalItems=loadObjectLocal("totalItems");
 if(totalItems>0)
     document.getElementById("count_product").innerText = totalItems;
 
@@ -134,8 +66,8 @@ function cleanCart() {
         cartTable.deleteRow(0);
     }
     document.getElementById("total_price").innerText = "0,00";
-    localAdapter.clearObject("cart");
-    localAdapter.clearObject("totalItems");
+    clearObjectLocal("cart");
+    clearObjectLocal("totalItems");
 
 }
 
@@ -249,8 +181,8 @@ function printCart(currentCart,table_id) {
 
     document.getElementById("total_price").innerText = grandTotal.toFixed(2);
 
-    localAdapter.saveObject(cart,"cart");
-    localAdapter.saveObject(totalItems,"totalItems");
+    saveObjectLocal(cart,"cart");
+    saveObjectLocal(totalItems,"totalItems");
 }
 
 
