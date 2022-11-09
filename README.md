@@ -40,8 +40,12 @@
 #   recalculamos el cart, los descuentos, la lista del carrito y los totales cada vez que se elimina un producto o una unidad de un producto
 #
 # N2.E10 maquetación real
-#   añadimos imagenes y tema real de una tienda de Harry Potter
+#   añadimos imagenes-1 y tema real de una tienda de Harry Potter
 #   añadimos funcionalidad para arrastrar el carrito de la compra desde index.html a checkout.html
 #   añadimos comportamiento responsive
+#
+# N2.E10-1 maquetación real
+#   movemos los datos a un archivo js (y tambien a un json para aprender) y los quitamos del shop.js
+#   refractor de la parte del carrito y de la parte del guardado en local del carrito
 
 

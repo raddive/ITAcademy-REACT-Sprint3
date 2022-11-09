@@ -1,7 +1,7 @@
 var error=0;
+var checkOutCart=loadObjectLocal("cart");
+var checkOutTotalItems=loadObjectLocal("totalItems");
 
-var checkOutCart=localAdapter.getObject("cart");
-var checkOutTotalItems=localAdapter.getObject("totalItems");
 if(checkOutCart && checkOutTotalItems>0)
 {
 	document.getElementById("check_out_count_product").innerText = checkOutTotalItems;
